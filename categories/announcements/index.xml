@@ -7,7 +7,30 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018-{year} &lt;a href=&#34;https://github.com/thepoetdj&#34;&gt;Dhruv Joshi&lt;/a&gt;&lt;/span&gt;&lt;span&gt;:: Favicon made by &lt;a href=&#34;https://www.deviantart.com/bakacowdesu&#34; target=&#34;_blank&#34;&gt;bakacowdesu&lt;/a&gt;&amp;nbsp;</copyright>
-    <lastBuildDate>Sat, 06 Oct 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://thepoetdj.github.io/categories/announcements/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://thepoetdj.github.io/categories/announcements/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Site Migration</title>
+      <link>https://thepoetdj.github.io/posts/site-migration/</link>
+      <pubDate>Sun, 05 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://thepoetdj.github.io/posts/site-migration/</guid>
+      <description>Finally!
+It has been a while since I wrote anything here.
+Migrating this site&amp;rsquo;s theme had been on my checklist for a long time.
+Initially, I had used tranquilpeak theme. But soon I found out that there were many features provided by that theme which I was never going to use. And I wanted to keep the design of the site to as minimal as possible.
+For the past couple of days I have been surfing through hugo themes in search for that minimal theme.</description>
+      <content>&lt;p&gt;Finally!&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;It has been a while since I wrote anything here.&lt;/p&gt;
+&lt;p&gt;Migrating this site&amp;rsquo;s theme had been on my checklist for a long time.&lt;/p&gt;
+&lt;p&gt;Initially, I had used &lt;a href=&#34;https://themes.gohugo.io/themes/hugo-tranquilpeak-theme/&#34;&gt;tranquilpeak&lt;/a&gt; theme. But soon I found out that there were many features provided by that theme which I was never going to use. And I wanted to keep the design of the site to as minimal as possible.&lt;/p&gt;
+&lt;p&gt;For the past couple of days I have been surfing through hugo &lt;a href=&#34;https://themes.gohugo.io&#34;&gt;themes&lt;/a&gt; in search for that minimal theme. And the result is in front of you. I have migrated to the &lt;a href=&#34;https://themes.gohugo.io/themes/hugo-theme-terminal/&#34;&gt;terminal&lt;/a&gt; theme.&lt;/p&gt;
+&lt;p&gt;Fortunately, there were very few post I had written so the migration process did not took that much time. But one thing is certain, that I am in love with this theme and will continue with it for a long term.&lt;/p&gt;
+&lt;p&gt;One final note though, I will be more active on publishing useful technical articles from now on.&lt;/p&gt;
+&lt;p&gt;See you in the next post soon!&lt;/p&gt;
+</content>
+    </item>
+    
     <item>
       <title>Became a Published Author with &#34;Whispering Solitude&#34;</title>
       <link>https://thepoetdj.github.io/posts/getting-published-with-whispering-solitude/</link>

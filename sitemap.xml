@@ -3,10 +3,25 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://thepoetdj.github.io/</loc>
-    <lastmod>2019-11-24T00:00:00+00:00</lastmod>
+    <lastmod>2023-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://thepoetdj.github.io/categories/announcements/</loc>
+    <lastmod>2023-03-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://thepoetdj.github.io/categories/</loc>
-    <lastmod>2019-11-24T00:00:00+00:00</lastmod>
+    <lastmod>2023-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://thepoetdj.github.io/tags/migration/</loc>
+    <lastmod>2023-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://thepoetdj.github.io/posts/</loc>
+    <lastmod>2023-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://thepoetdj.github.io/posts/site-migration/</loc>
+    <lastmod>2023-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://thepoetdj.github.io/tags/</loc>
+    <lastmod>2023-03-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://thepoetdj.github.io/tags/cli/</loc>
     <lastmod>2019-11-24T00:00:00+00:00</lastmod>
@@ -23,16 +38,10 @@
     <loc>https://thepoetdj.github.io/categories/multimedia/</loc>
     <lastmod>2019-11-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://thepoetdj.github.io/posts/</loc>
-    <lastmod>2019-11-24T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://thepoetdj.github.io/tags/pydub/</loc>
     <lastmod>2019-11-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://thepoetdj.github.io/tags/python/</loc>
-    <lastmod>2019-11-24T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://thepoetdj.github.io/tags/</loc>
     <lastmod>2019-11-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://thepoetdj.github.io/tags/ffmpeg/</loc>
@@ -58,9 +67,6 @@
   </url><url>
     <loc>https://thepoetdj.github.io/tags/sdkman/</loc>
     <lastmod>2018-11-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://thepoetdj.github.io/categories/announcements/</loc>
-    <lastmod>2018-10-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://thepoetdj.github.io/posts/getting-published-with-whispering-solitude/</loc>
     <lastmod>2018-10-06T00:00:00+00:00</lastmod>
