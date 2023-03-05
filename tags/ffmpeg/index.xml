@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ffmpeg on /home/dhruv-joshi</title>
+    <link>https://thepoetdj.github.io/tags/ffmpeg/</link>
+    <description>Recent content in ffmpeg on /home/dhruv-joshi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018-{year} &lt;a href=&#34;https://github.com/thepoetdj&#34;&gt;Dhruv Joshi&lt;/a&gt;&lt;/span&gt;&lt;span&gt;:: Favicon made by &lt;a href=&#34;https://www.deviantart.com/bakacowdesu&#34; target=&#34;_blank&#34;&gt;bakacowdesu&lt;/a&gt;&amp;nbsp;</copyright>
+    <lastBuildDate>Sat, 19 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://thepoetdj.github.io/tags/ffmpeg/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FFmpeg Audio Video Sync</title>
+      <link>https://thepoetdj.github.io/posts/ffmpeg-audio-video-sync/</link>
+      <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://thepoetdj.github.io/posts/ffmpeg-audio-video-sync/</guid>
+      <description>&lt;p&gt;Last night, I came across a media file in which audio playback was way behind the original video. So, to resolve the issue, I took the liberty of getting my hands dirty with &lt;em&gt;ffmpeg&lt;/em&gt;, instead of using a media player.&lt;/p&gt;</description>
+      <content>&lt;p&gt;Last night, I came across a media file in which audio playback was way behind the original video. So, to resolve the issue, I took the liberty of getting my hands dirty with &lt;em&gt;ffmpeg&lt;/em&gt;, instead of using a media player.&lt;/p&gt;
+&lt;p&gt;For those unaware of what &lt;a href=&#34;https://www.ffmpeg.org/&#34;&gt;FFmpeg&lt;/a&gt; is:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;FFmpeg is the leading multimedia framework, able to &lt;strong&gt;decode&lt;/strong&gt;, &lt;strong&gt;encode&lt;/strong&gt;, &lt;strong&gt;transcode&lt;/strong&gt;, &lt;strong&gt;mux&lt;/strong&gt;, &lt;strong&gt;demux&lt;/strong&gt;, &lt;strong&gt;stream&lt;/strong&gt;, &lt;strong&gt;filter&lt;/strong&gt; and &lt;strong&gt;play&lt;/strong&gt; pretty much anything that humans and machines have created.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To put it in simple words, ffmpeg not only allows you to stream audio and video, but also enables you to convert and record them.&lt;/p&gt;
+&lt;p&gt;So, as I mentioned at the beginning of the post, the media file I was playing had a delayed audio of about 15 seconds. Yikes!&lt;/p&gt;
+&lt;p&gt;Normally you could use your favorite media player to resolve such issues. For instance, you can specify the number of seconds in the &lt;em&gt;&amp;ldquo;Track Synchronization&amp;rdquo;&lt;/em&gt; tool of VLC media player to delay/hasten the audio. However, such large synchronizations on a low spec machine often results in a no-audio playback. Even increased file caching has no effects. Besides, I was looking for a rather permanent solution.&lt;/p&gt;
+&lt;h2 id=&#34;fetching-media-information&#34;&gt;Fetching Media Information&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;:: Info ::&lt;/strong&gt; Since we won&amp;rsquo;t be looking into how to intall FFmpeg on your system, you can go to the official &lt;a href=&#34;https://ffmpeg.org/download.html&#34;&gt;downloads&lt;/a&gt; page and follow your platform specific instructions to do the same.&lt;/p&gt;
+&lt;p&gt;Once installed, run the following command to verify your installation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffmpeg -version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The first thing required is to get the track information of the media file. For that, you use the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffmpeg -i input_file.mkv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;-i&lt;/code&gt; stands for the input file flag. The resulting output will contain a lot of information, out of which, following are some of the important ones:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Input #0, matroska,webm, from input_file.mkv:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Stream #0:0: Video: hevc (Main), yuv420p(tv), 1280x720 [SAR 1:1 DAR 16:9], 23.98 fps, 23.98 tbr, 1k tbn, 23.98 tbc (default)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Stream #0:1(eng): Audio: opus, 48000 Hz, stereo, fltp (default)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Stream #0:3(eng): Subtitle: ass (default)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;exploring-the-media-streams&#34;&gt;Exploring the Media Streams&lt;/h2&gt;
+&lt;p&gt;You can tell the common stream format from the above result as follows:&lt;/p&gt;
+&lt;p&gt;Stream &lt;em&gt;#infile_index:stream_index&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Since we specified only single input file, the &lt;em&gt;infile_index&lt;/em&gt; returned is &lt;code&gt;0&lt;/code&gt;. What if we tried the same command with two input files? Let&amp;rsquo;s try that:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffmpeg -i input_file.mkv -i input_file.mkv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You will see following additional information in the result:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Input #1, matroska,webm, from input_file.mkv:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Stream #1:0: Video: hevc (Main), yuv420p(tv), 1280x720 [SAR 1:1 DAR 16:9], 23.98 fps, 23.98 tbr, 1k tbn, 23.98 tbc (default)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Stream #1:1(eng): Audio: opus, 48000 Hz, stereo, fltp (default)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You would have noticed that the &lt;em&gt;Stream #&lt;/em&gt; is different for both inputs. Did you also notice that I specified the same media file twice? Yes. It is perfectly valid.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;:: Info ::&lt;/strong&gt; When the media file has multiple audio tracks, they will be specified together with the stream information, i.e. &lt;code&gt;Stream #0:1(eng)&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;set-media-offset&#34;&gt;Set Media Offset&lt;/h2&gt;
+&lt;p&gt;Now that we know of the media files&amp;rsquo; streams, our next step would be to change the offset of audio stream (we must not go astray from our original goal). To change the offset, following command is used:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffmpeg -itsoffset N -i input_file.mkv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;-itsoffset&lt;/code&gt; flag &lt;strong&gt;delays/hastens the whole input file.&lt;/strong&gt; Here &lt;code&gt;N&lt;/code&gt; stands for the number of seconds that should be delayed/hastened. Fractional values are also allowed. Although, you have to consider the following when changing the offset:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;A positive value of N delays the stream&lt;/li&gt;
+&lt;li&gt;A negative value of N hastens the stream&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Here is where we hit our milestone: &lt;em&gt;&amp;ldquo;How to hasten the audio of media file by 15 seconds?&amp;rdquo;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The command to do the same is as follows:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffmpeg -i input_file.mkv -itsoffset -15 -i input_file.mkv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;But wait. The above command would result in nothing! &lt;em&gt;Why?&lt;/em&gt; Because, we haven&amp;rsquo;t told ffmpeg which stream from which input file should be hastened i.e. Stream #1:1&lt;/p&gt;
+&lt;p&gt;How do we do that?&lt;/p&gt;
+&lt;h2 id=&#34;media-stream-mappings&#34;&gt;Media Stream Mappings&lt;/h2&gt;
+&lt;p&gt;As we know that the streams are of format &lt;em&gt;#infile_index:stream_index&lt;/em&gt;. We can use this at our advantage and tell ffmpeg which input file&amp;rsquo;s stream to apply the offset to. Let me make this easier to understand:&lt;/p&gt;
+&lt;p&gt;Our goal is to hasten the audio of the media file only, not the video. The video stream should be kept as it is. To achieve this, we have a &lt;code&gt;-map&lt;/code&gt; flag, that tells ffmpeg which stream of the input file should be exported to the output file. A command will make things more clear:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffmpeg -i input_file.mkv -itsoffset -15 -i input_file.mkv -map 0:0 -map 1:1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In the above command, I have specified two mappings:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;-map 0:0&lt;/code&gt;: Video stream of the 1st input file (without offset)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-map 1:1&lt;/code&gt;: Audio stream of the 2nd input file (with offset of -15 secs)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You must be wondering, &lt;em&gt;&amp;ldquo;Why do we have to do this mapping?&amp;rdquo;&lt;/em&gt; The answer, as I mentioned earlier, is because the &lt;code&gt;-itsoffset&lt;/code&gt; flag offsets the whole input file.&lt;/p&gt;
+&lt;h2 id=&#34;exporting&#34;&gt;Exporting&lt;/h2&gt;
+&lt;p&gt;We are almost done at this point. We found out:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;which streams are present in our media file, &lt;code&gt;-i&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;how to hasten the audio stream, &lt;code&gt;-itsoffset&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;how to tell ffmpeg which stream to apply offset to, &lt;code&gt;-map&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now all that remains is to export the output to a file. This is done by passing the name of the output file at the end of whole command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffmpeg -i input_file.mkv -itsoffset -15 -i input_file.mkv -map 0:0 -map 1:1 output_file.mkv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It might take some time, few seconds to few minutes (depending on input media size), to export the file. On successful completion, you will see the &lt;em&gt;output_file.mkv&lt;/em&gt; in your working directory, &lt;strong&gt;with synchronized audio.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Video synchronization works in a similar way. Just choose the video stream mapping of the offset media file and you are good to go.&lt;/p&gt;
+&lt;h2 id=&#34;bonus&#34;&gt;Bonus&lt;/h2&gt;
+&lt;h3 id=&#34;skip-re-encoding&#34;&gt;Skip Re-Encoding&lt;/h3&gt;
+&lt;p&gt;By default, ffmpeg will try to perform re-encoding on both the video and audio streams of the input media before exporting the final result, which is a time consuming task.&lt;/p&gt;
+&lt;p&gt;What if we want to skip this re-encoding process? It can be done using following flags:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-acodec copy&lt;/code&gt;: do not re-encode, just copy the audio stream&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-vcodec copy&lt;/code&gt;: do not re-encode, just copy the video stream&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So, the final command would be something like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffmpeg -i input_file.mkv -itsoffset -15 -i input_file.mkv -map 0:0 -map 1:1 -acodec copy -vcodec copy output_file.mkv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;convert-media-format&#34;&gt;Convert Media Format&lt;/h3&gt;
+&lt;p&gt;As metioned at the beginning, ffmpeg can be used to convert the file formats. So, What if want the output of our media to be in different format?&lt;/p&gt;
+&lt;p&gt;It is possible. However, &lt;strong&gt;in such case, the re-encoding phase cannot be skipped,&lt;/strong&gt; since the codec information will be different for both the input and the output files.&lt;/p&gt;
+&lt;p&gt;To convert the format, just change the extension of the output file and you are good to go:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffmpeg -i input_file.mkv -itsoffset -15 -i input_file.mkv -map 0:0 -map 1:1 output_file.avi
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Hope you learned something interesting. Thank you for reading. See you soon.&lt;/p&gt;</content>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>java on /home/dhruv-joshi</title>
+    <link>https://thepoetdj.github.io/tags/java/</link>
+    <description>Recent content in java on /home/dhruv-joshi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018-{year} &lt;a href=&#34;https://github.com/thepoetdj&#34;&gt;Dhruv Joshi&lt;/a&gt;&lt;/span&gt;&lt;span&gt;:: Favicon made by &lt;a href=&#34;https://www.deviantart.com/bakacowdesu&#34; target=&#34;_blank&#34;&gt;bakacowdesu&lt;/a&gt;&amp;nbsp;</copyright>
+    <lastBuildDate>Sun, 18 Nov 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://thepoetdj.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Easy Install: Java on Linux</title>
+      <link>https://thepoetdj.github.io/posts/easyinstall-java-linux/</link>
+      <pubDate>Sun, 18 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://thepoetdj.github.io/posts/easyinstall-java-linux/</guid>
+      <description>&lt;p&gt;Are you a Java developer, looking for a hassle-free way to use multiple versions of Java, without ever having to interact with the &lt;code&gt;JAVA_HOME&lt;/code&gt; variable? Well, look no further.&lt;/p&gt;</description>
+      <content>&lt;p&gt;Are you a Java developer, looking for a hassle-free way to use multiple versions of Java, without ever having to interact with the &lt;code&gt;JAVA_HOME&lt;/code&gt; variable? Well, look no further.&lt;/p&gt;
+&lt;h2 id=&#34;introducing-sdkman&#34;&gt;Introducing SDKMAN!&lt;/h2&gt;
+&lt;p&gt;From the official site:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://sdkman.io&#34;&gt;SDKMAN!&lt;/a&gt; is a tool for managing multiple versions of different Software Development Kits on most Unix based systems.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Yes. You read it correctly. With the command-line interface provided by SDKMAN!, you can install multiple versions of your favourite SDKs (not just JDK) on your favourite *nix based system!&lt;/p&gt;
+&lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;
+&lt;p&gt;Installing it is as easy as executing below command in the terminal:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ curl -s &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://get.sdkman.io&amp;#34;&lt;/span&gt; | bash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Confirm the installation by checking out the installed version. If you get &lt;code&gt;command not found&lt;/code&gt;, exit and start a new terminal session.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sdk version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;default-installation-directory&#34;&gt;Default installation directory&lt;/h4&gt;
+&lt;p&gt;By default, the CLI is installed under &lt;code&gt;$HOME/.sdkman/&lt;/code&gt; directory.&lt;/p&gt;
+&lt;p&gt;If you want to use a custom directory for the installation, let&amp;rsquo;s say &lt;code&gt;/Desktop/sdkman/&lt;/code&gt;, then execute the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ export SDKMAN_DIR&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/Desktop/sdkman&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; curl -s &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://get.sdkman.io&amp;#34;&lt;/span&gt; | bash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For the above command to succeed, make sure that the folder &lt;em&gt;sdkman&lt;/em&gt; &lt;strong&gt;does not exist&lt;/strong&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;packages&#34;&gt;Packages&lt;/h3&gt;
+&lt;p&gt;As mentioned before, the &lt;code&gt;sdk&lt;/code&gt; command allows us to install various development tools. &amp;lsquo;Which SDK tools are available?&amp;rsquo; you may ask. Following command tells you exactly that:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sdk list
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;While various JVM based languages including &lt;em&gt;Java&lt;/em&gt;, &lt;em&gt;Groovy&lt;/em&gt;, &lt;em&gt;Kotlin&lt;/em&gt; and, &lt;em&gt;Scala&lt;/em&gt; are there; don&amp;rsquo;t get surprised if you see one of your favourite frameworks (&lt;em&gt;Spring Boot&lt;/em&gt;, &lt;em&gt;Vert.x&lt;/em&gt; or &lt;em&gt;Micronaut&lt;/em&gt;) among the list! Some of the popular build tools (&lt;em&gt;Ant&lt;/em&gt;, &lt;em&gt;Gradle&lt;/em&gt; and &lt;em&gt;Maven&lt;/em&gt;) are also included.&lt;/p&gt;
+&lt;p&gt;Now then, back to our main objective&amp;hellip;&lt;/p&gt;
+&lt;h2 id=&#34;installing-java&#34;&gt;Installing Java&lt;/h2&gt;
+&lt;p&gt;Previous command gave us a list of all available SDKs, and we know that most of them have multiple versions available. What if we want to know exactly which versions of a particular language or framework or build tool are available?&lt;/p&gt;
+&lt;p&gt;That is as easy as passing the name of that SDK:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sdk list java
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You&amp;rsquo;ll see a list of Java versions available for install through the &lt;code&gt;sdk&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;To install a particular version, pass in that version signature to the following command (replacing {javaVersion}):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sdk install java &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;javaVersion&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now sit back and relax. The Java package will get downloaded, installed and the &lt;code&gt;JAVA_HOME&lt;/code&gt; will be set to this particular version, automatically!&lt;/p&gt;
+&lt;h3 id=&#34;multiple-versions&#34;&gt;Multiple Versions&lt;/h3&gt;
+&lt;p&gt;Assume that for some reason you have to use Java 7. Let&amp;rsquo;s use &lt;code&gt;sdk&lt;/code&gt; to install the same.&lt;/p&gt;
+&lt;p&gt;Check the version signature of Java 7 using &lt;code&gt;sdk list java&lt;/code&gt; and install it with &lt;code&gt;sdk install java {java7Version}&lt;/code&gt;. This is where things get interesting.&lt;/p&gt;
+&lt;p&gt;Since we already had a Java version installed earlier, SDKMAN! will take a note of that and after installation, will ask you &lt;strong&gt;whether you want this version to be set as default&lt;/strong&gt; or not. If you say &amp;lsquo;yes&amp;rsquo;, then the &lt;em&gt;default version will be set to newly installed one&lt;/em&gt; (Java 7)! Pretty cool, isn&amp;rsquo;t it?&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s verify the current version of Java installation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sdk current java
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You&amp;rsquo;ll see version 7 as your currently used one.&lt;/p&gt;
+&lt;h3 id=&#34;switch-versions&#34;&gt;Switch Versions&lt;/h3&gt;
+&lt;p&gt;Since we have two different versions of Java installed, what if we want to switch between them? SDKMAN! also has answer for that!&lt;/p&gt;
+&lt;p&gt;Know that there are two approaches for switching versions:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;For current terminal session only&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sdk use java &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;javaVersion&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Switch globally&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sdk default java &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;javaVersion&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You can verify the version changes using &lt;code&gt;java -version&lt;/code&gt; and &lt;code&gt;javac -version&lt;/code&gt; command.&lt;/p&gt;
+&lt;h3 id=&#34;uninstall&#34;&gt;Uninstall&lt;/h3&gt;
+&lt;p&gt;When your favourite SDK becomes outdated or is not longer used, we have to get rid of it, to give that HDD of ours some space to stretch into. You can do that with ease using &lt;code&gt;sdk&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sdk uninstall &amp;lt;sdk&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;sdkVersion&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can follow the same approach to install any other SDK. Just learn which version you want and install it with &lt;code&gt;sdk&lt;/code&gt;. And when the time comes to use different versions of your favourite SDK, you know what to do.&lt;/p&gt;
+&lt;h2 id=&#34;conculusion&#34;&gt;Conculusion&lt;/h2&gt;
+&lt;p&gt;SDKMAN! is an interesting command-line client. It not only provides a way to easily install one of the many provided SDKs, but also makes it easier to use and switch between different versions of the same. It is pretty good at cleanup too.&lt;/p&gt;</content>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Multimedia on /home/dhruv-joshi</title>
+    <link>https://thepoetdj.github.io/categories/multimedia/</link>
+    <description>Recent content in Multimedia on /home/dhruv-joshi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018-{year} &lt;a href=&#34;https://github.com/thepoetdj&#34;&gt;Dhruv Joshi&lt;/a&gt;&lt;/span&gt;&lt;span&gt;:: Favicon made by &lt;a href=&#34;https://www.deviantart.com/bakacowdesu&#34; target=&#34;_blank&#34;&gt;bakacowdesu&lt;/a&gt;&amp;nbsp;</copyright>
+    <lastBuildDate>Sun, 24 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://thepoetdj.github.io/categories/multimedia/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Edit Your Audio Files with aok</title>
+      <link>https://thepoetdj.github.io/posts/edit-audio-files-with-aok/</link>
+      <pubDate>Sun, 24 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://thepoetdj.github.io/posts/edit-audio-files-with-aok/</guid>
+      <description>&lt;p&gt;Being a fan of CLIs, I always wanted to create a command-line utility of my own. I was aiming for a practical application, instead of a tool which does nothing but print something on the console. And the result: &lt;code&gt;aok&lt;/code&gt;&lt;/p&gt;</description>
+      <content>&lt;p&gt;Being a fan of CLIs, I always wanted to create a command-line utility of my own. I was aiming for a practical application, instead of a tool which does nothing but print something on the console. And the result: &lt;code&gt;aok&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;aok&#34;&gt;aok&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/thepoetdj/aok&#34;&gt;&lt;code&gt;aok&lt;/code&gt;&lt;/a&gt; is a command-line utility to split an audio file or join multiple audio files into one or do both. It is open source and can be accessed from github.&lt;/p&gt;
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;:: Warning ::&lt;/strong&gt; Before you begin with installation, make sure that you have python 3.5+ installed on your system.&lt;/p&gt;
+&lt;h3 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/jiaaro/pydub&#34;&gt;pydub&lt;/a&gt;: it makes audio processing task easier, plus it supports ffmpeg&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://click.palletsprojects.com/en/7.x/&#34;&gt;Click&lt;/a&gt;: to manage the command-line interface of &lt;code&gt;aok&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;:: Info ::&lt;/strong&gt; I use and recommend &lt;a href=&#34;https://github.com/pypa/pipenv&#34;&gt;pipenv&lt;/a&gt; to install and manage &lt;code&gt;aok&lt;/code&gt; and its dependencies.&lt;/p&gt;
+&lt;p&gt;First, let&amp;rsquo;s clone the &lt;code&gt;aok&lt;/code&gt; repository and change into it:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ git clone https://github.com/thepoetdj/aok.git &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; cd aok
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Assuming that you have &lt;code&gt;pipenv&lt;/code&gt; installed on your system, create a virtual environment into the changed directory:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ pipenv shell
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once the virtual environment is created and activated, install &lt;code&gt;aok&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ pipenv install -e .
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
+&lt;p&gt;Once installed, checkout the basic help message:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ aok --help
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Usage: aok [OPTIONS] COMMAND [ARGS]...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  A utility to split and/or join audio files.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Options:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  --version  Show the version and exit.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  --help     Show this message and exit.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Commands:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  join   Merge two or more audio files.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  split  Split a song for given number of seconds.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;:: Warning ::&lt;/strong&gt; &lt;code&gt;aok&lt;/code&gt; is under active development, more commands will be added soon.&lt;/p&gt;
+&lt;h3 id=&#34;merge-audio-files&#34;&gt;Merge audio files&lt;/h3&gt;
+&lt;p&gt;Take a look at the help message of &lt;code&gt;join&lt;/code&gt; command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ aok join --help
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Usage: aok join [OPTIONS] INPUT...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Merge two or more audio files.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Options:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -f, --format [mp3|wav|aif|ogg]  The format of both input and output audio
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -o, --output PATH               Output file with absolute or relative path
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  --help                          Show this message and exit.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;With &lt;code&gt;aok&lt;/code&gt;, you can merge multiple audio files into a single playlist. What&amp;rsquo;s more, you can also specify the audio format!&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s merge few audio files. &lt;code&gt;aok&lt;/code&gt; supports &lt;code&gt;mp3&lt;/code&gt; extension by default.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ aok join &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;100degrees.mp3&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Dirty Disco.mp3&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;LA FIESTA.mp3&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Playlist created successfully!
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once you get the success message, checkout your current directory for the exported playlist.&lt;/p&gt;
+&lt;p&gt;The default output file has temporary name. If you want a specific name for your playlist, then use the &lt;code&gt;-o/--output&lt;/code&gt; option:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ aok join --output &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;My Playlist.mp3&amp;#39;&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As mentioned earlier, you can use &lt;code&gt;aok&lt;/code&gt; on different audio formats:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ aok join --format wav --output repeated_explosion.wav explosion.wav
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;:: Warning ::&lt;/strong&gt; &lt;em&gt;Both the input and output audio has to be of &lt;strong&gt;same format&lt;/strong&gt; for the &lt;code&gt;-f/--format&lt;/code&gt; option to work.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Did you notice that I gave only one audio as input? In such cases, the &lt;code&gt;join&lt;/code&gt; command will simply repeat the audio in exported playlist. Cool, isn&amp;rsquo;t it?&lt;/p&gt;
+&lt;h3 id=&#34;split-an-audio-file&#34;&gt;Split an audio file&lt;/h3&gt;
+&lt;p&gt;Let&amp;rsquo;s see what the &lt;code&gt;split&lt;/code&gt; command does:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ aok split --help
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Usage: aok split [OPTIONS] INPUT
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Split a song for given number of seconds.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  The seconds are counted from the beginning of the input song. In case the
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  number of seconds exceeds the input song&amp;#39;s length, input song will be
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  exported as it is.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Options:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -f, --format [mp3|wav|aif|ogg]  The format of both input and output audio
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -s, --seconds INTEGER           The number of seconds to split the song for
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                  [required]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -o, --output PATH               Output file with absolute or relative path
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  --help                          Show this message and exit.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Say that you want only the first 25 seconds of a music file. With &lt;code&gt;aok&lt;/code&gt;, you can do that as follows:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ aok split -s &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; -o &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;25 seconds.mp3&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;My Music.mp3&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If everything goes right, you should see a success message. Also, in your working directory, an audio file with name &lt;em&gt;25 seconds.mp3&lt;/em&gt; would be created that contains only the first 25 seconds of the input audio file.&lt;/p&gt;
+&lt;p&gt;Had you noticed the help message, you would already know that when the number of seconds provided exceeds the actual length of the input audio, it will be exported as it is. You will receive a warning message in such case though.&lt;/p&gt;
+&lt;p&gt;As mentioned previously, &lt;code&gt;aok&lt;/code&gt; supports &lt;em&gt;mp3&lt;/em&gt; format by default. However, you can use one of the supported formats: &lt;em&gt;mp3, wav, aif, ogg&lt;/em&gt; for your audio files. Just make sure to use the same format for audio files in that case.&lt;/p&gt;
+&lt;h2 id=&#34;the-road-ahead&#34;&gt;The road ahead&lt;/h2&gt;
+&lt;p&gt;I am actively looking for new ways to improve &lt;code&gt;aok&lt;/code&gt;. Be it adding new feature, doing bugfixes, etc. Let me show you a glimpse of what I have lined up for future releases:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Export merge playlists with metadata information&lt;/li&gt;
+&lt;li&gt;Split files between start &amp;amp; end range&lt;/li&gt;
+&lt;li&gt;Add effects to an audio file&lt;/li&gt;
+&lt;li&gt;A way to execute both split and merge in a single command&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With that said, see you again next time!&lt;/p&gt;</content>
+    </item>
+    
+    <item>
+      <title>FFmpeg Audio Video Sync</title>
+      <link>https://thepoetdj.github.io/posts/ffmpeg-audio-video-sync/</link>
+      <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://thepoetdj.github.io/posts/ffmpeg-audio-video-sync/</guid>
+      <description>&lt;p&gt;Last night, I came across a media file in which audio playback was way behind the original video. So, to resolve the issue, I took the liberty of getting my hands dirty with &lt;em&gt;ffmpeg&lt;/em&gt;, instead of using a media player.&lt;/p&gt;</description>
+      <content>&lt;p&gt;Last night, I came across a media file in which audio playback was way behind the original video. So, to resolve the issue, I took the liberty of getting my hands dirty with &lt;em&gt;ffmpeg&lt;/em&gt;, instead of using a media player.&lt;/p&gt;
+&lt;p&gt;For those unaware of what &lt;a href=&#34;https://www.ffmpeg.org/&#34;&gt;FFmpeg&lt;/a&gt; is:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;FFmpeg is the leading multimedia framework, able to &lt;strong&gt;decode&lt;/strong&gt;, &lt;strong&gt;encode&lt;/strong&gt;, &lt;strong&gt;transcode&lt;/strong&gt;, &lt;strong&gt;mux&lt;/strong&gt;, &lt;strong&gt;demux&lt;/strong&gt;, &lt;strong&gt;stream&lt;/strong&gt;, &lt;strong&gt;filter&lt;/strong&gt; and &lt;strong&gt;play&lt;/strong&gt; pretty much anything that humans and machines have created.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To put it in simple words, ffmpeg not only allows you to stream audio and video, but also enables you to convert and record them.&lt;/p&gt;
+&lt;p&gt;So, as I mentioned at the beginning of the post, the media file I was playing had a delayed audio of about 15 seconds. Yikes!&lt;/p&gt;
+&lt;p&gt;Normally you could use your favorite media player to resolve such issues. For instance, you can specify the number of seconds in the &lt;em&gt;&amp;ldquo;Track Synchronization&amp;rdquo;&lt;/em&gt; tool of VLC media player to delay/hasten the audio. However, such large synchronizations on a low spec machine often results in a no-audio playback. Even increased file caching has no effects. Besides, I was looking for a rather permanent solution.&lt;/p&gt;
+&lt;h2 id=&#34;fetching-media-information&#34;&gt;Fetching Media Information&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;:: Info ::&lt;/strong&gt; Since we won&amp;rsquo;t be looking into how to intall FFmpeg on your system, you can go to the official &lt;a href=&#34;https://ffmpeg.org/download.html&#34;&gt;downloads&lt;/a&gt; page and follow your platform specific instructions to do the same.&lt;/p&gt;
+&lt;p&gt;Once installed, run the following command to verify your installation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffmpeg -version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The first thing required is to get the track information of the media file. For that, you use the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffmpeg -i input_file.mkv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;-i&lt;/code&gt; stands for the input file flag. The resulting output will contain a lot of information, out of which, following are some of the important ones:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Input #0, matroska,webm, from input_file.mkv:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Stream #0:0: Video: hevc (Main), yuv420p(tv), 1280x720 [SAR 1:1 DAR 16:9], 23.98 fps, 23.98 tbr, 1k tbn, 23.98 tbc (default)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Stream #0:1(eng): Audio: opus, 48000 Hz, stereo, fltp (default)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Stream #0:3(eng): Subtitle: ass (default)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;exploring-the-media-streams&#34;&gt;Exploring the Media Streams&lt;/h2&gt;
+&lt;p&gt;You can tell the common stream format from the above result as follows:&lt;/p&gt;
+&lt;p&gt;Stream &lt;em&gt;#infile_index:stream_index&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Since we specified only single input file, the &lt;em&gt;infile_index&lt;/em&gt; returned is &lt;code&gt;0&lt;/code&gt;. What if we tried the same command with two input files? Let&amp;rsquo;s try that:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffmpeg -i input_file.mkv -i input_file.mkv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You will see following additional information in the result:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Input #1, matroska,webm, from input_file.mkv:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Stream #1:0: Video: hevc (Main), yuv420p(tv), 1280x720 [SAR 1:1 DAR 16:9], 23.98 fps, 23.98 tbr, 1k tbn, 23.98 tbc (default)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Stream #1:1(eng): Audio: opus, 48000 Hz, stereo, fltp (default)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You would have noticed that the &lt;em&gt;Stream #&lt;/em&gt; is different for both inputs. Did you also notice that I specified the same media file twice? Yes. It is perfectly valid.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;:: Info ::&lt;/strong&gt; When the media file has multiple audio tracks, they will be specified together with the stream information, i.e. &lt;code&gt;Stream #0:1(eng)&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;set-media-offset&#34;&gt;Set Media Offset&lt;/h2&gt;
+&lt;p&gt;Now that we know of the media files&amp;rsquo; streams, our next step would be to change the offset of audio stream (we must not go astray from our original goal). To change the offset, following command is used:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffmpeg -itsoffset N -i input_file.mkv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;-itsoffset&lt;/code&gt; flag &lt;strong&gt;delays/hastens the whole input file.&lt;/strong&gt; Here &lt;code&gt;N&lt;/code&gt; stands for the number of seconds that should be delayed/hastened. Fractional values are also allowed. Although, you have to consider the following when changing the offset:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;A positive value of N delays the stream&lt;/li&gt;
+&lt;li&gt;A negative value of N hastens the stream&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Here is where we hit our milestone: &lt;em&gt;&amp;ldquo;How to hasten the audio of media file by 15 seconds?&amp;rdquo;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The command to do the same is as follows:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffmpeg -i input_file.mkv -itsoffset -15 -i input_file.mkv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;But wait. The above command would result in nothing! &lt;em&gt;Why?&lt;/em&gt; Because, we haven&amp;rsquo;t told ffmpeg which stream from which input file should be hastened i.e. Stream #1:1&lt;/p&gt;
+&lt;p&gt;How do we do that?&lt;/p&gt;
+&lt;h2 id=&#34;media-stream-mappings&#34;&gt;Media Stream Mappings&lt;/h2&gt;
+&lt;p&gt;As we know that the streams are of format &lt;em&gt;#infile_index:stream_index&lt;/em&gt;. We can use this at our advantage and tell ffmpeg which input file&amp;rsquo;s stream to apply the offset to. Let me make this easier to understand:&lt;/p&gt;
+&lt;p&gt;Our goal is to hasten the audio of the media file only, not the video. The video stream should be kept as it is. To achieve this, we have a &lt;code&gt;-map&lt;/code&gt; flag, that tells ffmpeg which stream of the input file should be exported to the output file. A command will make things more clear:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffmpeg -i input_file.mkv -itsoffset -15 -i input_file.mkv -map 0:0 -map 1:1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In the above command, I have specified two mappings:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;-map 0:0&lt;/code&gt;: Video stream of the 1st input file (without offset)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-map 1:1&lt;/code&gt;: Audio stream of the 2nd input file (with offset of -15 secs)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You must be wondering, &lt;em&gt;&amp;ldquo;Why do we have to do this mapping?&amp;rdquo;&lt;/em&gt; The answer, as I mentioned earlier, is because the &lt;code&gt;-itsoffset&lt;/code&gt; flag offsets the whole input file.&lt;/p&gt;
+&lt;h2 id=&#34;exporting&#34;&gt;Exporting&lt;/h2&gt;
+&lt;p&gt;We are almost done at this point. We found out:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;which streams are present in our media file, &lt;code&gt;-i&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;how to hasten the audio stream, &lt;code&gt;-itsoffset&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;how to tell ffmpeg which stream to apply offset to, &lt;code&gt;-map&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now all that remains is to export the output to a file. This is done by passing the name of the output file at the end of whole command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffmpeg -i input_file.mkv -itsoffset -15 -i input_file.mkv -map 0:0 -map 1:1 output_file.mkv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It might take some time, few seconds to few minutes (depending on input media size), to export the file. On successful completion, you will see the &lt;em&gt;output_file.mkv&lt;/em&gt; in your working directory, &lt;strong&gt;with synchronized audio.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Video synchronization works in a similar way. Just choose the video stream mapping of the offset media file and you are good to go.&lt;/p&gt;
+&lt;h2 id=&#34;bonus&#34;&gt;Bonus&lt;/h2&gt;
+&lt;h3 id=&#34;skip-re-encoding&#34;&gt;Skip Re-Encoding&lt;/h3&gt;
+&lt;p&gt;By default, ffmpeg will try to perform re-encoding on both the video and audio streams of the input media before exporting the final result, which is a time consuming task.&lt;/p&gt;
+&lt;p&gt;What if we want to skip this re-encoding process? It can be done using following flags:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-acodec copy&lt;/code&gt;: do not re-encode, just copy the audio stream&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-vcodec copy&lt;/code&gt;: do not re-encode, just copy the video stream&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So, the final command would be something like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffmpeg -i input_file.mkv -itsoffset -15 -i input_file.mkv -map 0:0 -map 1:1 -acodec copy -vcodec copy output_file.mkv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;convert-media-format&#34;&gt;Convert Media Format&lt;/h3&gt;
+&lt;p&gt;As metioned at the beginning, ffmpeg can be used to convert the file formats. So, What if want the output of our media to be in different format?&lt;/p&gt;
+&lt;p&gt;It is possible. However, &lt;strong&gt;in such case, the re-encoding phase cannot be skipped,&lt;/strong&gt; since the codec information will be different for both the input and the output files.&lt;/p&gt;
+&lt;p&gt;To convert the format, just change the extension of the output file and you are good to go:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ffmpeg -i input_file.mkv -itsoffset -15 -i input_file.mkv -map 0:0 -map 1:1 output_file.avi
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Hope you learned something interesting. Thank you for reading. See you soon.&lt;/p&gt;</content>
+    </item>
+    
+  </channel>
+</rss>

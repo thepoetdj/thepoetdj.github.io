@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Edit Your Audio Files with aok :: /home/dhruv-joshi</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Being a fan of CLIs, I always wanted to create a command-line utility of my own. I was aiming for a practical application, instead of a tool which does nothing but print something on the console. And the result: aok
+" />
+<meta name="keywords" content="command-line audio split merge, python cli audio utility" />
+<meta name="robots" content="noodp" />
+
+<link rel="canonical" href="https://thepoetdj.github.io/posts/edit-audio-files-with-aok/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://thepoetdj.github.io/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="https://thepoetdj.github.io/favicon.ico">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Edit Your Audio Files with aok">
+<meta property="og:description" content="Being a fan of CLIs, I always wanted to create a command-line utility of my own. I was aiming for a practical application, instead of a tool which does nothing but print something on the console. And the result: aok
+" />
+<meta property="og:url" content="https://thepoetdj.github.io/posts/edit-audio-files-with-aok/" />
+<meta property="og:site_name" content="/home/dhruv-joshi" />
+
+  
+    <meta property="og:image" content="https://thepoetdj.github.io/favicon.ico">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+  <meta property="article:section" content="Multimedia" />
+
+
+  <meta property="article:published_time" content="2019-11-24 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="pink">
+
+
+<div class="container center">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="https://thepoetdj.github.io/">
+  <div class="logo">
+    /home/dhruv-joshi
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="https://thepoetdj.github.io/whoami">Who am I</a></li>
+        
+      
+        
+          <li><a href="https://thepoetdj.github.io/posts">Blog</a></li>
+        
+      
+        
+          <li><a href="https://thepoetdj.github.io/categories">Categories</a></li>
+        
+      
+        
+          <li><a href="https://thepoetdj.github.io/tags">Tags</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="https://thepoetdj.github.io/whoami">Who am I</a></li>
+        
+      
+        
+          <li><a href="https://thepoetdj.github.io/posts">Blog</a></li>
+        
+      
+      
+        <li>
+          <ul class="menu">
+            <li class="menu__trigger">Show more&nbsp;▾</li>
+            <li>
+              <ul class="menu__dropdown">
+                
+                  
+                    <li><a href="https://thepoetdj.github.io/categories">Categories</a></li>
+                  
+                
+                  
+                    <li><a href="https://thepoetdj.github.io/tags">Tags</a></li>
+                  
+                
+              </ul>
+            </li>
+          </ul>
+        </li>
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://thepoetdj.github.io/posts/edit-audio-files-with-aok/">Edit Your Audio Files with aok</a>
+  </h1>
+  <div class="post-meta">
+    
+      <time class="post-date">
+        2019-11-24 ::
+        
+      </time>
+    
+    
+      <span class="post-author">Dhruv Joshi</span>
+    
+    
+      <span class="post-reading-time">:: 4 min read (780 words)</span>
+    
+  </div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="https://thepoetdj.github.io/tags/cli/">cli</a>&nbsp;
+      
+      #<a href="https://thepoetdj.github.io/tags/python/">python</a>&nbsp;
+      
+      #<a href="https://thepoetdj.github.io/tags/click/">click</a>&nbsp;
+      
+      #<a href="https://thepoetdj.github.io/tags/pydub/">pydub</a>&nbsp;
+      
+      #<a href="https://thepoetdj.github.io/tags/multimedia/">multimedia</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+    <div class="table-of-contents">
+      <h2>
+        Table of Contents
+      </h2>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#installation">Installation</a>
+      <ul>
+        <li><a href="#dependencies">Dependencies</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a>
+      <ul>
+        <li><a href="#merge-audio-files">Merge audio files</a></li>
+        <li><a href="#split-an-audio-file">Split an audio file</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-road-ahead">The road ahead</a></li>
+  </ul>
+</nav>
+    </div>
+  
+
+  <div class="post-content"><div>
+        <p>Being a fan of CLIs, I always wanted to create a command-line utility of my own. I was aiming for a practical application, instead of a tool which does nothing but print something on the console. And the result: <code>aok</code></p>
+<h1 id="aok">aok<a href="#aok" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p><a href="https://github.com/thepoetdj/aok"><code>aok</code></a> is a command-line utility to split an audio file or join multiple audio files into one or do both. It is open source and can be accessed from github.</p>
+<h2 id="installation">Installation<a href="#installation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p><strong>:: Warning ::</strong> Before you begin with installation, make sure that you have python 3.5+ installed on your system.</p>
+<h3 id="dependencies">Dependencies<a href="#dependencies" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<ul>
+<li><a href="https://github.com/jiaaro/pydub">pydub</a>: it makes audio processing task easier, plus it supports ffmpeg</li>
+<li><a href="https://click.palletsprojects.com/en/7.x/">Click</a>: to manage the command-line interface of <code>aok</code></li>
+</ul>
+<p><strong>:: Info ::</strong> I use and recommend <a href="https://github.com/pypa/pipenv">pipenv</a> to install and manage <code>aok</code> and its dependencies.</p>
+<p>First, let&rsquo;s clone the <code>aok</code> repository and change into it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git clone https://github.com/thepoetdj/aok.git <span style="color:#f92672">&amp;&amp;</span> cd aok
+</span></span></code></pre></div><p>Assuming that you have <code>pipenv</code> installed on your system, create a virtual environment into the changed directory:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ pipenv shell
+</span></span></code></pre></div><p>Once the virtual environment is created and activated, install <code>aok</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ pipenv install -e .
+</span></span></code></pre></div><h2 id="usage">Usage<a href="#usage" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Once installed, checkout the basic help message:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>$ aok --help
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Usage: aok [OPTIONS] COMMAND [ARGS]...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  A utility to split and/or join audio files.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Options:
+</span></span><span style="display:flex;"><span>  --version  Show the version and exit.
+</span></span><span style="display:flex;"><span>  --help     Show this message and exit.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Commands:
+</span></span><span style="display:flex;"><span>  join   Merge two or more audio files.
+</span></span><span style="display:flex;"><span>  split  Split a song for given number of seconds.
+</span></span></code></pre></div><p><strong>:: Warning ::</strong> <code>aok</code> is under active development, more commands will be added soon.</p>
+<h3 id="merge-audio-files">Merge audio files<a href="#merge-audio-files" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Take a look at the help message of <code>join</code> command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>$ aok join --help
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Usage: aok join [OPTIONS] INPUT...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Merge two or more audio files.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Options:
+</span></span><span style="display:flex;"><span>  -f, --format [mp3|wav|aif|ogg]  The format of both input and output audio
+</span></span><span style="display:flex;"><span>  -o, --output PATH               Output file with absolute or relative path
+</span></span><span style="display:flex;"><span>  --help                          Show this message and exit.
+</span></span></code></pre></div><p>With <code>aok</code>, you can merge multiple audio files into a single playlist. What&rsquo;s more, you can also specify the audio format!</p>
+<p>Let&rsquo;s merge few audio files. <code>aok</code> supports <code>mp3</code> extension by default.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ aok join <span style="color:#e6db74">&#39;100degrees.mp3&#39;</span> <span style="color:#e6db74">&#39;Dirty Disco.mp3&#39;</span> <span style="color:#e6db74">&#39;LA FIESTA.mp3&#39;</span>
+</span></span><span style="display:flex;"><span>Playlist created successfully!
+</span></span></code></pre></div><p>Once you get the success message, checkout your current directory for the exported playlist.</p>
+<p>The default output file has temporary name. If you want a specific name for your playlist, then use the <code>-o/--output</code> option:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ aok join --output <span style="color:#e6db74">&#39;My Playlist.mp3&#39;</span> ...
+</span></span></code></pre></div><p>As mentioned earlier, you can use <code>aok</code> on different audio formats:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ aok join --format wav --output repeated_explosion.wav explosion.wav
+</span></span></code></pre></div><p><strong>:: Warning ::</strong> <em>Both the input and output audio has to be of <strong>same format</strong> for the <code>-f/--format</code> option to work.</em></p>
+<p>Did you notice that I gave only one audio as input? In such cases, the <code>join</code> command will simply repeat the audio in exported playlist. Cool, isn&rsquo;t it?</p>
+<h3 id="split-an-audio-file">Split an audio file<a href="#split-an-audio-file" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Let&rsquo;s see what the <code>split</code> command does:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>$ aok split --help
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Usage: aok split [OPTIONS] INPUT
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Split a song for given number of seconds.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  The seconds are counted from the beginning of the input song. In case the
+</span></span><span style="display:flex;"><span>  number of seconds exceeds the input song&#39;s length, input song will be
+</span></span><span style="display:flex;"><span>  exported as it is.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Options:
+</span></span><span style="display:flex;"><span>  -f, --format [mp3|wav|aif|ogg]  The format of both input and output audio
+</span></span><span style="display:flex;"><span>  -s, --seconds INTEGER           The number of seconds to split the song for
+</span></span><span style="display:flex;"><span>                                  [required]
+</span></span><span style="display:flex;"><span>  -o, --output PATH               Output file with absolute or relative path
+</span></span><span style="display:flex;"><span>  --help                          Show this message and exit.
+</span></span></code></pre></div><p>Say that you want only the first 25 seconds of a music file. With <code>aok</code>, you can do that as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ aok split -s <span style="color:#ae81ff">25</span> -o <span style="color:#e6db74">&#39;25 seconds.mp3&#39;</span> <span style="color:#e6db74">&#39;My Music.mp3&#39;</span>
+</span></span></code></pre></div><p>If everything goes right, you should see a success message. Also, in your working directory, an audio file with name <em>25 seconds.mp3</em> would be created that contains only the first 25 seconds of the input audio file.</p>
+<p>Had you noticed the help message, you would already know that when the number of seconds provided exceeds the actual length of the input audio, it will be exported as it is. You will receive a warning message in such case though.</p>
+<p>As mentioned previously, <code>aok</code> supports <em>mp3</em> format by default. However, you can use one of the supported formats: <em>mp3, wav, aif, ogg</em> for your audio files. Just make sure to use the same format for audio files in that case.</p>
+<h2 id="the-road-ahead">The road ahead<a href="#the-road-ahead" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>I am actively looking for new ways to improve <code>aok</code>. Be it adding new feature, doing bugfixes, etc. Let me show you a glimpse of what I have lined up for future releases:</p>
+<ul>
+<li>Export merge playlists with metadata information</li>
+<li>Split files between start &amp; end range</li>
+<li>Add effects to an audio file</li>
+<li>A way to execute both split and merge in a single command</li>
+</ul>
+<p>With that said, see you again next time!</p>
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        
+        <span class="button next">
+            <a href="https://thepoetdj.github.io/posts/ffmpeg-audio-video-sync/">
+                <span class="button__text">FFmpeg Audio Video Sync</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>&copy; 2018-2023 <a href="https://github.com/thepoetdj">Dhruv Joshi</a></span><span>:: Favicon made by <a href="https://www.deviantart.com/bakacowdesu" target="_blank">bakacowdesu</a>&nbsp;</span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="https://thepoetdj.github.io/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

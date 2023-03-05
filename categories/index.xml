@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on /home/dhruv-joshi</title>
+    <link>https://thepoetdj.github.io/categories/</link>
+    <description>Recent content in Categories on /home/dhruv-joshi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018-{year} &lt;a href=&#34;https://github.com/thepoetdj&#34;&gt;Dhruv Joshi&lt;/a&gt;&lt;/span&gt;&lt;span&gt;:: Favicon made by &lt;a href=&#34;https://www.deviantart.com/bakacowdesu&#34; target=&#34;_blank&#34;&gt;bakacowdesu&lt;/a&gt;&amp;nbsp;</copyright>
+    <lastBuildDate>Sun, 24 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://thepoetdj.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Multimedia</title>
+      <link>https://thepoetdj.github.io/categories/multimedia/</link>
+      <pubDate>Sun, 24 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://thepoetdj.github.io/categories/multimedia/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>EasyInstall</title>
+      <link>https://thepoetdj.github.io/categories/easyinstall/</link>
+      <pubDate>Sun, 18 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://thepoetdj.github.io/categories/easyinstall/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>Announcements</title>
+      <link>https://thepoetdj.github.io/categories/announcements/</link>
+      <pubDate>Sat, 06 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://thepoetdj.github.io/categories/announcements/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+  </channel>
+</rss>

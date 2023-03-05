@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>FFmpeg Audio Video Sync :: /home/dhruv-joshi</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Last night, I came across a media file in which audio playback was way behind the original video. So, to resolve the issue, I took the liberty of getting my hands dirty with ffmpeg, instead of using a media player.
+" />
+<meta name="keywords" content="ffmpeg audio sync, audio synchronization with ffmpeg, command-line audio synchronization" />
+<meta name="robots" content="noodp" />
+
+<link rel="canonical" href="https://thepoetdj.github.io/posts/ffmpeg-audio-video-sync/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://thepoetdj.github.io/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="https://thepoetdj.github.io/favicon.ico">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="FFmpeg Audio Video Sync">
+<meta property="og:description" content="Last night, I came across a media file in which audio playback was way behind the original video. So, to resolve the issue, I took the liberty of getting my hands dirty with ffmpeg, instead of using a media player.
+" />
+<meta property="og:url" content="https://thepoetdj.github.io/posts/ffmpeg-audio-video-sync/" />
+<meta property="og:site_name" content="/home/dhruv-joshi" />
+
+  
+    <meta property="og:image" content="https://thepoetdj.github.io/favicon.ico">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+  <meta property="article:section" content="Multimedia" />
+
+
+  <meta property="article:published_time" content="2019-10-19 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="pink">
+
+
+<div class="container center">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="https://thepoetdj.github.io/">
+  <div class="logo">
+    /home/dhruv-joshi
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="https://thepoetdj.github.io/whoami">Who am I</a></li>
+        
+      
+        
+          <li><a href="https://thepoetdj.github.io/posts">Blog</a></li>
+        
+      
+        
+          <li><a href="https://thepoetdj.github.io/categories">Categories</a></li>
+        
+      
+        
+          <li><a href="https://thepoetdj.github.io/tags">Tags</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="https://thepoetdj.github.io/whoami">Who am I</a></li>
+        
+      
+        
+          <li><a href="https://thepoetdj.github.io/posts">Blog</a></li>
+        
+      
+      
+        <li>
+          <ul class="menu">
+            <li class="menu__trigger">Show more&nbsp;▾</li>
+            <li>
+              <ul class="menu__dropdown">
+                
+                  
+                    <li><a href="https://thepoetdj.github.io/categories">Categories</a></li>
+                  
+                
+                  
+                    <li><a href="https://thepoetdj.github.io/tags">Tags</a></li>
+                  
+                
+              </ul>
+            </li>
+          </ul>
+        </li>
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://thepoetdj.github.io/posts/ffmpeg-audio-video-sync/">FFmpeg Audio Video Sync</a>
+  </h1>
+  <div class="post-meta">
+    
+      <time class="post-date">
+        2019-10-19 ::
+        
+      </time>
+    
+    
+      <span class="post-author">Dhruv Joshi</span>
+    
+    
+      <span class="post-reading-time">:: 6 min read (1151 words)</span>
+    
+  </div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="https://thepoetdj.github.io/tags/cli/">cli</a>&nbsp;
+      
+      #<a href="https://thepoetdj.github.io/tags/ffmpeg/">ffmpeg</a>&nbsp;
+      
+      #<a href="https://thepoetdj.github.io/tags/multimedia/">multimedia</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+    <div class="table-of-contents">
+      <h2>
+        Table of Contents
+      </h2>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#fetching-media-information">Fetching Media Information</a></li>
+    <li><a href="#exploring-the-media-streams">Exploring the Media Streams</a></li>
+    <li><a href="#set-media-offset">Set Media Offset</a></li>
+    <li><a href="#media-stream-mappings">Media Stream Mappings</a></li>
+    <li><a href="#exporting">Exporting</a></li>
+    <li><a href="#bonus">Bonus</a>
+      <ul>
+        <li><a href="#skip-re-encoding">Skip Re-Encoding</a></li>
+        <li><a href="#convert-media-format">Convert Media Format</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  
+
+  <div class="post-content"><div>
+        <p>Last night, I came across a media file in which audio playback was way behind the original video. So, to resolve the issue, I took the liberty of getting my hands dirty with <em>ffmpeg</em>, instead of using a media player.</p>
+<p>For those unaware of what <a href="https://www.ffmpeg.org/">FFmpeg</a> is:</p>
+<blockquote>
+<p>FFmpeg is the leading multimedia framework, able to <strong>decode</strong>, <strong>encode</strong>, <strong>transcode</strong>, <strong>mux</strong>, <strong>demux</strong>, <strong>stream</strong>, <strong>filter</strong> and <strong>play</strong> pretty much anything that humans and machines have created.</p>
+</blockquote>
+<p>To put it in simple words, ffmpeg not only allows you to stream audio and video, but also enables you to convert and record them.</p>
+<p>So, as I mentioned at the beginning of the post, the media file I was playing had a delayed audio of about 15 seconds. Yikes!</p>
+<p>Normally you could use your favorite media player to resolve such issues. For instance, you can specify the number of seconds in the <em>&ldquo;Track Synchronization&rdquo;</em> tool of VLC media player to delay/hasten the audio. However, such large synchronizations on a low spec machine often results in a no-audio playback. Even increased file caching has no effects. Besides, I was looking for a rather permanent solution.</p>
+<h2 id="fetching-media-information">Fetching Media Information<a href="#fetching-media-information" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p><strong>:: Info ::</strong> Since we won&rsquo;t be looking into how to intall FFmpeg on your system, you can go to the official <a href="https://ffmpeg.org/download.html">downloads</a> page and follow your platform specific instructions to do the same.</p>
+<p>Once installed, run the following command to verify your installation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ffmpeg -version
+</span></span></code></pre></div><p>The first thing required is to get the track information of the media file. For that, you use the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ffmpeg -i input_file.mkv
+</span></span></code></pre></div><p><code>-i</code> stands for the input file flag. The resulting output will contain a lot of information, out of which, following are some of the important ones:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Input #0, matroska,webm, from input_file.mkv:
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>Stream #0:0: Video: hevc (Main), yuv420p(tv), 1280x720 [SAR 1:1 DAR 16:9], 23.98 fps, 23.98 tbr, 1k tbn, 23.98 tbc (default)
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>Stream #0:1(eng): Audio: opus, 48000 Hz, stereo, fltp (default)
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>Stream #0:3(eng): Subtitle: ass (default)
+</span></span></code></pre></div><h2 id="exploring-the-media-streams">Exploring the Media Streams<a href="#exploring-the-media-streams" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>You can tell the common stream format from the above result as follows:</p>
+<p>Stream <em>#infile_index:stream_index</em></p>
+<p>Since we specified only single input file, the <em>infile_index</em> returned is <code>0</code>. What if we tried the same command with two input files? Let&rsquo;s try that:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ffmpeg -i input_file.mkv -i input_file.mkv
+</span></span></code></pre></div><p>You will see following additional information in the result:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>Input #1, matroska,webm, from input_file.mkv:
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>Stream #1:0: Video: hevc (Main), yuv420p(tv), 1280x720 [SAR 1:1 DAR 16:9], 23.98 fps, 23.98 tbr, 1k tbn, 23.98 tbc (default)
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>Stream #1:1(eng): Audio: opus, 48000 Hz, stereo, fltp (default)
+</span></span></code></pre></div><p>You would have noticed that the <em>Stream #</em> is different for both inputs. Did you also notice that I specified the same media file twice? Yes. It is perfectly valid.</p>
+<p><strong>:: Info ::</strong> When the media file has multiple audio tracks, they will be specified together with the stream information, i.e. <code>Stream #0:1(eng)</code></p>
+<h2 id="set-media-offset">Set Media Offset<a href="#set-media-offset" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Now that we know of the media files&rsquo; streams, our next step would be to change the offset of audio stream (we must not go astray from our original goal). To change the offset, following command is used:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ffmpeg -itsoffset N -i input_file.mkv
+</span></span></code></pre></div><p>The <code>-itsoffset</code> flag <strong>delays/hastens the whole input file.</strong> Here <code>N</code> stands for the number of seconds that should be delayed/hastened. Fractional values are also allowed. Although, you have to consider the following when changing the offset:</p>
+<ol>
+<li>A positive value of N delays the stream</li>
+<li>A negative value of N hastens the stream</li>
+</ol>
+<p>Here is where we hit our milestone: <em>&ldquo;How to hasten the audio of media file by 15 seconds?&rdquo;</em></p>
+<p>The command to do the same is as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ffmpeg -i input_file.mkv -itsoffset -15 -i input_file.mkv
+</span></span></code></pre></div><p>But wait. The above command would result in nothing! <em>Why?</em> Because, we haven&rsquo;t told ffmpeg which stream from which input file should be hastened i.e. Stream #1:1</p>
+<p>How do we do that?</p>
+<h2 id="media-stream-mappings">Media Stream Mappings<a href="#media-stream-mappings" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>As we know that the streams are of format <em>#infile_index:stream_index</em>. We can use this at our advantage and tell ffmpeg which input file&rsquo;s stream to apply the offset to. Let me make this easier to understand:</p>
+<p>Our goal is to hasten the audio of the media file only, not the video. The video stream should be kept as it is. To achieve this, we have a <code>-map</code> flag, that tells ffmpeg which stream of the input file should be exported to the output file. A command will make things more clear:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ffmpeg -i input_file.mkv -itsoffset -15 -i input_file.mkv -map 0:0 -map 1:1
+</span></span></code></pre></div><p>In the above command, I have specified two mappings:</p>
+<ol>
+<li><code>-map 0:0</code>: Video stream of the 1st input file (without offset)</li>
+<li><code>-map 1:1</code>: Audio stream of the 2nd input file (with offset of -15 secs)</li>
+</ol>
+<p>You must be wondering, <em>&ldquo;Why do we have to do this mapping?&rdquo;</em> The answer, as I mentioned earlier, is because the <code>-itsoffset</code> flag offsets the whole input file.</p>
+<h2 id="exporting">Exporting<a href="#exporting" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>We are almost done at this point. We found out:</p>
+<ul>
+<li>which streams are present in our media file, <code>-i</code></li>
+<li>how to hasten the audio stream, <code>-itsoffset</code></li>
+<li>how to tell ffmpeg which stream to apply offset to, <code>-map</code></li>
+</ul>
+<p>Now all that remains is to export the output to a file. This is done by passing the name of the output file at the end of whole command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ffmpeg -i input_file.mkv -itsoffset -15 -i input_file.mkv -map 0:0 -map 1:1 output_file.mkv
+</span></span></code></pre></div><p>It might take some time, few seconds to few minutes (depending on input media size), to export the file. On successful completion, you will see the <em>output_file.mkv</em> in your working directory, <strong>with synchronized audio.</strong></p>
+<p>Video synchronization works in a similar way. Just choose the video stream mapping of the offset media file and you are good to go.</p>
+<h2 id="bonus">Bonus<a href="#bonus" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h3 id="skip-re-encoding">Skip Re-Encoding<a href="#skip-re-encoding" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>By default, ffmpeg will try to perform re-encoding on both the video and audio streams of the input media before exporting the final result, which is a time consuming task.</p>
+<p>What if we want to skip this re-encoding process? It can be done using following flags:</p>
+<ul>
+<li><code>-acodec copy</code>: do not re-encode, just copy the audio stream</li>
+<li><code>-vcodec copy</code>: do not re-encode, just copy the video stream</li>
+</ul>
+<p>So, the final command would be something like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ffmpeg -i input_file.mkv -itsoffset -15 -i input_file.mkv -map 0:0 -map 1:1 -acodec copy -vcodec copy output_file.mkv
+</span></span></code></pre></div><h3 id="convert-media-format">Convert Media Format<a href="#convert-media-format" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>As metioned at the beginning, ffmpeg can be used to convert the file formats. So, What if want the output of our media to be in different format?</p>
+<p>It is possible. However, <strong>in such case, the re-encoding phase cannot be skipped,</strong> since the codec information will be different for both the input and the output files.</p>
+<p>To convert the format, just change the extension of the output file and you are good to go:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ffmpeg -i input_file.mkv -itsoffset -15 -i input_file.mkv -map 0:0 -map 1:1 output_file.avi
+</span></span></code></pre></div><p>Hope you learned something interesting. Thank you for reading. See you soon.</p>
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://thepoetdj.github.io/posts/edit-audio-files-with-aok/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Edit Your Audio Files with aok</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://thepoetdj.github.io/posts/easyinstall-java-linux/">
+                <span class="button__text">Easy Install: Java on Linux</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>&copy; 2018-2023 <a href="https://github.com/thepoetdj">Dhruv Joshi</a></span><span>:: Favicon made by <a href="https://www.deviantart.com/bakacowdesu" target="_blank">bakacowdesu</a>&nbsp;</span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="https://thepoetdj.github.io/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
